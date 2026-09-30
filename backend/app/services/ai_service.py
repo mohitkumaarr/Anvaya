@@ -48,7 +48,7 @@ class AIService:
         context_str += "\n\nPOLICIES:\n" + "\n".join([f"- {p.get('title')}: {p.get('summary')}" for p in policies[:3]])
         
         prompt = f"""
-You are the AI Engine for LandGov AI, India's National Land Governance Research & Policy Platform.
+You are the AI Engine for Anvaya, India's National Land Governance Research & Policy Platform.
 Answer the user's research inquiry based strictly on the provided context.
 Return ONLY valid JSON matching this schema:
 {{

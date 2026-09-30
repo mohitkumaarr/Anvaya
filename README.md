@@ -1,4 +1,4 @@
-# Anvaya (LandGov AI) — National Land Governance Research & Policy Innovation Platform
+# Anvaya — National Land Governance Research & Policy Platform
 
 [![CI Pipeline](https://github.com/mohitkumaarr/Anvaya/actions/workflows/ci.yml/badge.svg)](https://github.com/mohitkumaarr/Anvaya/actions/workflows/ci.yml)
 [![Repository](https://img.shields.io/badge/GitHub-mohitkumaarr%2FAnvaya-blue.svg)](https://github.com/mohitkumaarr/Anvaya)
@@ -16,7 +16,7 @@ DATA ──▶ RESEARCH ──▶ AI ANALYSIS ──▶ GEOSPATIAL INSIGHT ─�
 
 ## 🏛️ Executive Platform Overview
 
-**LandGov AI** addresses the structural fragmentation between statutory land revenue administration, spatial town planning, academic research, and policy formulation. It serves as a unified digital public infrastructure (DPI) concept where researchers, town planners, and policymakers can:
+**Anvaya** addresses the structural fragmentation between statutory land revenue administration, spatial town planning, academic research, and policy formulation. It serves as a unified digital public infrastructure (DPI) concept where researchers, town planners, and policymakers can:
 * Discover peer-reviewed empirical evidence and legislative acts across 15+ Indian states.
 * Interrogate land issues using a domain-calibrated **AI Research Copilot** with source attribution.
 * Inspect multi-layer **GIS Spatial Intelligence** (satellite LULC, urban sprawl velocity, flood risk, and climate vulnerability indices).

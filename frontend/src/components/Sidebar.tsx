@@ -82,13 +82,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
             <div>
               <div className="flex items-center space-x-1.5">
-                <span className="text-base font-bold tracking-tight text-slate-900">LandGov AI</span>
+                <span className="text-base font-bold tracking-tight text-slate-900">Anvaya</span>
                 <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-800">
                   INDIA
                 </span>
               </div>
               <p className="text-[11px] leading-tight text-slate-500 font-medium">
-                National Land Governance Platform
+                Land Governance & Policy Platform
               </p>
             </div>
           </div>

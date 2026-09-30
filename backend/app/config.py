@@ -14,7 +14,7 @@ is_vercel = bool(os.getenv("VERCEL"))
 default_db = "sqlite:////tmp/landgov.db" if is_vercel else "sqlite:///./landgov.db"
 
 class Settings:
-    PROJECT_NAME: str = "LandGov AI — National Land Governance Platform"
+    PROJECT_NAME: str = "Anvaya — National Land Governance Research & Policy Platform"
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api"
     

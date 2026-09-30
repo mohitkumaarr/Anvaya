@@ -20,7 +20,7 @@ class BriefGeneratorService:
         
         executive_summary = (
             f"This policy brief addresses critical governance bottlenecks in '{topic}' across {region_name}. "
-            f"Synthesizing recent spatial audits, peer-reviewed empirical studies, and simulation models from the LandGov AI platform, "
+            f"Synthesizing recent spatial audits, peer-reviewed empirical studies, and simulation models from the Anvaya platform, "
             f"this brief establishes that conventional post-facto regularization must be replaced with proactive spatial zoning overlays "
             f"and tenure harmonization under {policy_title}. Analytical modeling indicates that targeted ecological zoning and land-pooling "
             f"reforms can mitigate unauthorized conversion by up to 34% while safeguarding agricultural livelihoods."
@@ -90,7 +90,7 @@ class BriefGeneratorService:
                 {"metric": "Climate Resilience Score", "baseline": "52/100", "simulated": "74/100", "delta": "+22 pts"},
                 {"metric": "Ag Land Protection", "baseline": "54.2%", "simulated": "61.8%", "delta": "+7.6%"}
             ],
-            "modeling_notes": "Estimated using LandGov AI Policy Simulator calibrated against regional master plan indicators."
+            "modeling_notes": "Estimated using Anvaya Policy Simulator calibrated against regional master plan indicators."
         }
 
         potential_impacts = {

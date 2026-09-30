@@ -1,6 +1,6 @@
-# LandGov AI — Production Deployment Guide
+# Anvaya — Production Deployment Guide
 
-This guide details instructions for deploying **LandGov AI (Anvaya) — National Land Governance Research & Policy Innovation Platform** in production, staging, and local environments.
+This guide details instructions for deploying **Anvaya — National Land Governance Research & Policy Platform** in production, staging, and local environments.
 
 ---
 

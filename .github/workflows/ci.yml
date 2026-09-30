@@ -1,4 +1,4 @@
-name: LandGov AI — CI Pipeline
+name: Anvaya — CI Pipeline
 
 on:
   push:

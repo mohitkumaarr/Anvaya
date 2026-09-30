@@ -36,12 +36,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onExplore }) => {
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="font-bold text-base text-white tracking-tight">LandGov AI</span>
+                <span className="font-bold text-base text-white tracking-tight">Anvaya</span>
                 <span className="rounded bg-amber-400/20 text-amber-300 px-1.5 py-0.5 text-[10px] font-semibold tracking-wider">
                   NATIONAL PLATFORM MVP
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400">National Land Governance Research & Policy Innovation Platform</p>
+              <p className="text-[11px] text-slate-400">National Land Governance Research & Policy Platform</p>
             </div>
           </div>
 
@@ -201,7 +201,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onExplore }) => {
       <footer className="mt-auto border-t border-slate-800 bg-slate-950 py-8 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <p className="text-slate-400 font-semibold">LandGov AI — National Land Governance Platform MVP</p>
+            <p className="text-slate-400 font-semibold">Anvaya — National Land Governance Research & Policy Platform</p>
             <p className="mt-1">
               Demonstration environment. Synthetic and demonstration data clearly designated for research and policy prototyping.
             </p>

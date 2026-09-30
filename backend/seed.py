@@ -1228,7 +1228,7 @@ def seed_database():
         notifications_data = [
             {
                 "user_id": lead_user.id,
-                "title": "Welcome to LandGov AI Platform",
+                "title": "Welcome to Anvaya Platform",
                 "message": "The National Land Governance Research & Policy Innovation platform environment is fully operational.",
                 "type": "INFO",
                 "link": "/"

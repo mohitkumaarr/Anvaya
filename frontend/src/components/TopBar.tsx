@@ -41,7 +41,7 @@ export const TopBar: React.FC<TopBarProps> = ({
       } catch (e) {
         // Fallback demo notifications
         setNotifications([
-          { id: 1, title: 'Welcome to LandGov AI', message: 'Demo Environment initialized with 35+ research papers.', type: 'INFO', read: false, link: '/' },
+          { id: 1, title: 'Welcome to Anvaya', message: 'Platform initialized with 35+ research papers and GIS indicators.', type: 'INFO', read: false, link: '/' },
           { id: 2, title: 'Research Gap Identified', message: 'Peri-Urban Governance gap updated with spatial data.', type: 'GAP', read: false, link: '/gap-finder' }
         ]);
       }

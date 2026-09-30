@@ -1,6 +1,6 @@
-# LandGov AI - Development Startup Script
+# Anvaya - Development Startup Script
 Write-Host "==========================================================================" -ForegroundColor Cyan
-Write-Host "LandGov AI — National Land Governance Research & Policy Platform" -ForegroundColor Yellow
+Write-Host "Anvaya — National Land Governance Research & Policy Platform" -ForegroundColor Yellow
 Write-Host "Starting Full-Stack Platform in Demo Environment Mode..." -ForegroundColor Green
 Write-Host "==========================================================================" -ForegroundColor Cyan
 

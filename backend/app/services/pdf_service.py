@@ -47,7 +47,7 @@ class PDFService:
                     "author": meta.get("author") or "Government / Academic Research Author",
                     "subject": meta.get("subject") or "National Land Governance Policy",
                     "keywords": meta.get("keywords") or "Land Governance, Spatial Planning, India",
-                    "creator": meta.get("creator") or "LandGov Platform",
+                    "creator": meta.get("creator") or "Anvaya Platform",
                 },
                 "page_count": len(doc),
                 "chunks": chunks

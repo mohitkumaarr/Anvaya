@@ -2,7 +2,7 @@
 set -e
 
 echo "=========================================================="
-echo " Starting LandGov AI — National Land Governance Platform   "
+echo " Starting Anvaya — National Land Governance Platform       "
 echo "=========================================================="
 
 # Check and wait for database if PostgreSQL is used
