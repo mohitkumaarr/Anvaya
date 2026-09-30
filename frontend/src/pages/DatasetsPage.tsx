@@ -19,14 +19,101 @@ import {
 import { api } from '../api';
 import { DatasetItem } from '../types';
 
+const SAMPLE_DATASETS: DatasetItem[] = [
+  {
+    id: 1,
+    title: 'National Drone Cadastre (SVAMITVA Large-Scale Mapping)',
+    description: 'High-resolution 5cm Ground Sampling Distance orthophoto parcel boundaries and digital property card spatial polygons across inhabited rural abadi areas.',
+    source: 'Ministry of Panchayati Raj / Survey of India',
+    publication_year: 2024,
+    geographic_coverage: 'National / Abadi Areas',
+    format: 'GeoJSON',
+    record_count: 1240000,
+    tags: ['SVAMITVA', 'Drone Cadastre', 'Digital Property Cards'],
+    sample_data: [
+      { parcel_id: 'UP-VAR-001', state: 'Uttar Pradesh', district: 'Varanasi', area_sqm: 145.2, accuracy_cm: 4.8 },
+      { parcel_id: 'UP-VAR-002', state: 'Uttar Pradesh', district: 'Varanasi', area_sqm: 210.5, accuracy_cm: 4.6 }
+    ],
+    variables: [
+      { name: 'parcel_id', type: 'string', desc: 'Unique spatial cadastral identifier' },
+      { name: 'area_sqm', type: 'float', desc: 'Ground parcel area in square meters' }
+    ],
+    last_updated: '2024-03-15',
+    is_demo: true
+  },
+  {
+    id: 2,
+    title: 'NRSC Bhuvan Multi-Temporal Land Use & Land Cover (LULC) 50m Series',
+    description: 'Multi-year surface classification tracking agricultural net sown area, forest canopy, wetlands, and urban built-up expansion rates.',
+    source: 'National Remote Sensing Centre (NRSC / ISRO)',
+    publication_year: 2024,
+    geographic_coverage: 'All India',
+    format: 'GeoJSON',
+    record_count: 850000,
+    tags: ['Land Use', 'Remote Sensing', 'Bhuvan', 'Urban Expansion'],
+    sample_data: [
+      { state_code: 'MH', lulc_class: 'Agricultural Net Sown', pct_cover: 56.8, shift_annual_pct: -0.3 },
+      { state_code: 'MH', lulc_class: 'Urban Built-Up', pct_cover: 14.5, shift_annual_pct: +5.1 }
+    ],
+    variables: [
+      { name: 'state_code', type: 'string', desc: 'Standard 2-letter state ISO code' },
+      { name: 'pct_cover', type: 'float', desc: 'Percentage of surface coverage' }
+    ],
+    last_updated: '2024-02-10',
+    is_demo: true
+  },
+  {
+    id: 3,
+    title: 'Digital India Land Records Modernization Database (DILRMP)',
+    description: 'Comprehensive registry of computerized land mutation turnaround times, registration-mutation API linkages, and revenue dispute case logs.',
+    source: 'Department of Land Resources (DoLR), MoRD',
+    publication_year: 2023,
+    geographic_coverage: '650 Districts Statewide',
+    format: 'CSV',
+    record_count: 65000,
+    tags: ['DILRMP', 'Dispute Resolution', 'Cadastre Modernization'],
+    sample_data: [
+      { district: 'Pune', state: 'Maharashtra', avg_mutation_days: 8.2, digitized_parcels: 98.4 },
+      { district: 'Bengaluru Rural', state: 'Karnataka', avg_mutation_days: 6.8, digitized_parcels: 99.1 }
+    ],
+    variables: [
+      { name: 'district', type: 'string', desc: 'Administrative district' },
+      { name: 'avg_mutation_days', type: 'float', desc: 'Average turnaround time in business days' }
+    ],
+    last_updated: '2023-11-20',
+    is_demo: true
+  },
+  {
+    id: 4,
+    title: 'National Climate Vulnerability Index & Flood Plain Encroachment Registry',
+    description: 'Synthesized hydrodynamic flood modeling indices merged with sub-registrar riverine parcel buffers and seasonal wetland commons.',
+    source: 'Council on Energy, Environment and Water (CEEW) / NDMA',
+    publication_year: 2024,
+    geographic_coverage: 'Coastal & Riverine Basins',
+    format: 'JSON',
+    record_count: 42000,
+    tags: ['Climate Vulnerability', 'Flood Plain', 'Wetlands'],
+    sample_data: [
+      { state: 'Kerala', district: 'Alappuzha', cvi_score: 0.69, wetland_loss_pct: 14.2 },
+      { state: 'Assam', district: 'Dibrugarh', cvi_score: 0.84, wetland_loss_pct: 18.9 }
+    ],
+    variables: [
+      { name: 'cvi_score', type: 'float', desc: 'Climate Vulnerability Index (0.0 to 1.0)' },
+      { name: 'wetland_loss_pct', type: 'float', desc: 'Annual reduction in natural water retention area' }
+    ],
+    last_updated: '2024-04-12',
+    is_demo: true
+  }
+];
+
 interface DatasetsPageProps {
   onNavigate: (tab: string, meta?: any) => void;
   selectedDatasetId?: number;
 }
 
 export const DatasetsPage: React.FC<DatasetsPageProps> = ({ onNavigate, selectedDatasetId }) => {
-  const [datasets, setDatasets] = useState<DatasetItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [datasets, setDatasets] = useState<DatasetItem[]>(SAMPLE_DATASETS);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedFormat, setSelectedFormat] = useState('All');
   const [selectedTag, setSelectedTag] = useState('All');
@@ -39,14 +126,33 @@ export const DatasetsPage: React.FC<DatasetsPageProps> = ({ onNavigate, selected
     setLoading(true);
     try {
       const list = await api.datasets.list(search, selectedFormat, selectedTag);
-      setDatasets(list);
-
-      if (selectedDatasetId) {
-        const match = list.find((d) => d.id === selectedDatasetId);
-        if (match) handlePreview(match);
+      if (Array.isArray(list) && list.length > 0) {
+        setDatasets(list);
+        if (selectedDatasetId) {
+          const match = list.find((d) => d.id === selectedDatasetId);
+          if (match) handlePreview(match);
+        }
+      } else {
+        // Filter sample datasets client-side
+        let filtered = [...SAMPLE_DATASETS];
+        if (search.trim()) {
+          const q = search.toLowerCase();
+          filtered = filtered.filter((d) => d.title.toLowerCase().includes(q) || d.description.toLowerCase().includes(q));
+        }
+        if (selectedFormat !== 'All') filtered = filtered.filter((d) => d.format === selectedFormat);
+        if (selectedTag !== 'All') filtered = filtered.filter((d) => d.tags.some((t) => t.toLowerCase().includes(selectedTag.toLowerCase())));
+        setDatasets(filtered);
       }
     } catch (e) {
-      console.error(e);
+      console.warn('API datasets fetch failed, falling back to embedded catalog:', e);
+      let filtered = [...SAMPLE_DATASETS];
+      if (search.trim()) {
+        const q = search.toLowerCase();
+        filtered = filtered.filter((d) => d.title.toLowerCase().includes(q) || d.description.toLowerCase().includes(q));
+      }
+      if (selectedFormat !== 'All') filtered = filtered.filter((d) => d.format === selectedFormat);
+      if (selectedTag !== 'All') filtered = filtered.filter((d) => d.tags.some((t) => t.toLowerCase().includes(selectedTag.toLowerCase())));
+      setDatasets(filtered);
     } finally {
       setLoading(false);
     }

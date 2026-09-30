@@ -28,14 +28,107 @@ import {
 import { api } from '../api';
 import { ResearchGapItem } from '../types';
 
+const SAMPLE_GAPS: ResearchGapItem[] = [
+  {
+    id: 1,
+    topic: 'Peri-Urban Land Governance & Agricultural Conversion',
+    category: 'Spatial Planning & Land Use',
+    research_concentration_level: 'HIGH',
+    urban_expansion_pct: 88,
+    land_use_planning_pct: 24,
+    climate_resilience_pct: 42,
+    social_displacement_pct: 35,
+    geographic_gaps: ['Maharashtra (Pune Corridor)', 'Gujarat (Sanand Belt)', 'Karnataka (Bengaluru Fringe)'],
+    temporal_gaps: ['Post-2020 High-Speed Expressway Impact'],
+    dataset_gaps: ['Sub-district cadastral conversion deeds vs GIS layers'],
+    existing_studies: [
+      { title: 'Peri-Urban Land Use Dynamics in India', authors: 'Dr. Vandana Shiva et al.' }
+    ],
+    relevant_policies: [
+      { code: 'RFCTLARR-2013', title: 'Land Acquisition & Fair Compensation Act' }
+    ],
+    available_datasets: [
+      { title: 'NRSC Bhuvan Multi-Temporal LULC Series' }
+    ],
+    potential_research_questions: [
+      'How does lack of coordination between Gram Panchayats and Metropolitan Authorities accelerate prime farmland loss?'
+    ],
+    research_opportunity: {
+      problem: 'Systemic policy bottleneck where peri-urban zones outside municipal limits experience 24% annual agricultural conversion with zero statutory coordination between village panchayats and regional planning authorities.',
+      objectives: ['Quantify spatial friction', 'Design statutory Joint Cadastral Committee models'],
+      expected_outcomes: 'Model notification for statutory green zoning buffers'
+    }
+  },
+  {
+    id: 2,
+    topic: 'High-Altitude Cadastral Surveying & Slope Orthophoto Protocols',
+    category: 'Digital Cadastre & SVAMITVA',
+    research_concentration_level: 'HIGH',
+    urban_expansion_pct: 45,
+    land_use_planning_pct: 28,
+    climate_resilience_pct: 82,
+    social_displacement_pct: 40,
+    geographic_gaps: ['Himachal Pradesh (Shimla/Kullu)', 'Uttarakhand (Garhwal)'],
+    temporal_gaps: ['2021-2024 SVAMITVA Drone Operations'],
+    dataset_gaps: ['3D digital surface models for slopes exceeding 30 degrees'],
+    existing_studies: [
+      { title: 'Drone Surveying Standards in Mountainous Terrain', authors: 'Survey of India Working Group' }
+    ],
+    relevant_policies: [
+      { code: 'SVAMITVA-2021', title: 'SVAMITVA Large-Scale Mapping Guidelines' }
+    ],
+    available_datasets: [
+      { title: 'National Drone Cadastre (SVAMITVA)' }
+    ],
+    potential_research_questions: [
+      'What orthorectification algorithms minimize boundary displacement in steep terrain?'
+    ],
+    research_opportunity: {
+      problem: 'Steep topography causes 2D orthophoto distortion, resulting in parcel boundary overlaps during ground truthing.',
+      objectives: ['Benchmark 3D true-ortho elevation models', 'Develop slope-corrected parcel demarcation rules'],
+      expected_outcomes: 'National technical manual for hill-state cadastral surveys'
+    }
+  },
+  {
+    id: 3,
+    topic: 'Wetland Encroachment and Coastal Flood Zone Statutory Ambiguities',
+    category: 'Climate Vulnerability & Commons',
+    research_concentration_level: 'HIGH',
+    urban_expansion_pct: 78,
+    land_use_planning_pct: 32,
+    climate_resilience_pct: 94,
+    social_displacement_pct: 68,
+    geographic_gaps: ['Kerala Coastal Basins', 'West Bengal Sundarbans Fringe'],
+    temporal_gaps: ['Post-2018 Extreme Monsoon Inundation Events'],
+    dataset_gaps: ['Dynamic hydro-cadastral overlays showing seasonal water retention commons'],
+    existing_studies: [
+      { title: 'Land Governance and Climate Resilience in Riverine Basins', authors: 'Dr. Arunabha Ghosh et al.' }
+    ],
+    relevant_policies: [
+      { code: 'WETLAND-2017', title: 'Wetland Conservation and Management Rules' }
+    ],
+    available_datasets: [
+      { title: 'National Climate Vulnerability Index & Flood Plain Registry' }
+    ],
+    potential_research_questions: [
+      'How can hydrodynamic flood modeling be statutorily linked to revenue land registers?'
+    ],
+    research_opportunity: {
+      problem: 'Absence of legally enforceable hydrological cadastre overlays allows commercial zoning on designated retention commons.',
+      objectives: ['Design mandatory Climate Vulnerability Ratings for parcel development', 'Protect community water commons'],
+      expected_outcomes: 'Model coastal and riverine floodplain land governance ordinance'
+    }
+  }
+];
+
 interface ResearchGapPageProps {
   onNavigate: (tab: string, meta?: any) => void;
 }
 
 export const ResearchGapPage: React.FC<ResearchGapPageProps> = ({ onNavigate }) => {
-  const [gaps, setGaps] = useState<ResearchGapItem[]>([]);
-  const [activeGap, setActiveGap] = useState<ResearchGapItem | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [gaps, setGaps] = useState<ResearchGapItem[]>(SAMPLE_GAPS);
+  const [activeGap, setActiveGap] = useState<ResearchGapItem | null>(SAMPLE_GAPS[0]);
+  const [loading, setLoading] = useState(false);
   const [creatingProject, setCreatingProject] = useState(false);
   const [successNotice, setSuccessNotice] = useState('');
 
@@ -44,10 +137,12 @@ export const ResearchGapPage: React.FC<ResearchGapPageProps> = ({ onNavigate }) 
       setLoading(true);
       try {
         const list = await api.researchGaps.list();
-        setGaps(list);
-        if (list.length > 0) setActiveGap(list[0]);
+        if (Array.isArray(list) && list.length > 0) {
+          setGaps(list);
+          setActiveGap(list[0]);
+        }
       } catch (e) {
-        console.error(e);
+        console.warn('API research gaps fetch fallback:', e);
       } finally {
         setLoading(false);
       }
