@@ -1,9 +1,21 @@
 import os
+import sys
+from pathlib import Path
+
+# Add project root and backend directory to sys.path for Vercel, Docker, and local execution
+_current_dir = Path(__file__).resolve().parent
+_backend_dir = _current_dir.parent
+_project_root = _backend_dir.parent
+
+for p in [str(_project_root), str(_backend_dir)]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from backend.app.config import settings
-from backend.app.database import engine, Base
+from backend.app.database import engine, Base, SessionLocal
 from backend.app.routers import (
     auth,
     documents,
@@ -31,8 +43,9 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
     description="National Digital Infrastructure Platform for Evidence-Based Land Governance and Policy Innovation in India.",
-    docs_url="/docs",
-    redoc_url="/redoc"
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json",
+    redoc_url="/api/redoc"
 )
 
 # CORS configuration
@@ -68,6 +81,8 @@ app.include_router(innovation.router)
 app.include_router(notifications.router)
 
 @app.get("/")
+@app.get("/api")
+@app.get("/api/")
 def root():
     return {
         "platform": settings.PROJECT_NAME,
@@ -75,8 +90,13 @@ def root():
         "status": "OPERATIONAL",
         "demo_mode": settings.DEMO_MODE,
         "environment": settings.ENVIRONMENT,
-        "documentation": "/docs"
+        "documentation": "/api/docs"
     }
+
+@app.get("/docs", include_in_schema=False)
+def docs_redirect():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/api/docs")
 
 @app.get("/api/health")
 def health_check():
