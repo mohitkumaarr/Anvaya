@@ -151,15 +151,12 @@ export const PolicyLabPage: React.FC<PolicyLabPageProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
           <div className="flex items-center space-x-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-400 text-slate-950 font-bold">
-              <FlaskConical className="h-4 w-4" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-white font-bold">
+              <FlaskConical className="h-4 w-4 text-amber-400" />
             </div>
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
-              Policy Lab — Interactive Scenario Simulator
+              Policy Lab — Scenario Simulation Engine
             </h2>
-            <span className="rounded-full bg-amber-100 text-amber-900 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider">
-              Hero Feature
-            </span>
           </div>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
             Test hypothetical land governance parameters, statutory green zoning allocations, and public infrastructure investments.

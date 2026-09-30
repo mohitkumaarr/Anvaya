@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { Sidebar } from './components/Sidebar';
 import { TopBar } from './components/TopBar';
-import { DemoGuideBanner } from './components/DemoGuideBanner';
 import { GlobalSearchModal } from './components/GlobalSearchModal';
 
 import { LandingPage } from './pages/LandingPage';
@@ -55,9 +54,6 @@ function AppContent() {
           onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           onNavigate={handleNavigate}
         />
-
-        {/* Persistent Demo Walkthrough Guide Banner */}
-        <DemoGuideBanner currentTab={currentTab} onNavigate={handleNavigate} />
 
         {/* Dynamic Route View */}
         <main className="flex-1 pb-16">

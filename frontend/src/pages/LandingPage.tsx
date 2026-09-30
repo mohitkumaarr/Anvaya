@@ -170,7 +170,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onExplore }) => {
               <h3 className="text-base font-bold text-white group-hover:text-amber-300 transition-colors">
                 Policy Lab Simulator
               </h3>
-              <span className="rounded bg-amber-400 text-slate-950 font-bold text-[9px] px-1.5 py-0.2 uppercase">Hero</span>
             </div>
             <p className="text-xs text-slate-300 mt-2 leading-relaxed">
               Interactive scenario simulator. Adjust green allocation, urban limits, and agricultural protections to project multi-sector environmental and economic outcomes.

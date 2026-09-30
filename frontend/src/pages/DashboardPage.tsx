@@ -187,21 +187,21 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Quick Launch Buttons */}
+        {/* Quick Actions */}
         <div className="flex items-center space-x-2 shrink-0">
           <button
             onClick={() => onNavigate('copilot')}
-            className="flex items-center space-x-1.5 rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-800 shadow-sm transition-colors"
+            className="flex items-center space-x-1.5 rounded border border-slate-300 bg-white hover:bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-2xs transition-colors"
           >
-            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+            <Sparkles className="h-3.5 w-3.5 text-blue-700" />
             <span>AI Copilot</span>
           </button>
           <button
             onClick={() => onNavigate('policy-lab')}
-            className="flex items-center space-x-1.5 rounded-lg bg-amber-400 px-3 py-1.5 text-xs font-bold text-slate-950 hover:bg-amber-300 shadow-sm transition-colors"
+            className="flex items-center space-x-1.5 rounded bg-slate-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-slate-800 shadow-2xs transition-colors"
           >
-            <FlaskConical className="h-3.5 w-3.5" />
-            <span>Simulate in Policy Lab</span>
+            <FlaskConical className="h-3.5 w-3.5 text-slate-300" />
+            <span>Policy Lab Simulator</span>
           </button>
         </div>
       </div>
