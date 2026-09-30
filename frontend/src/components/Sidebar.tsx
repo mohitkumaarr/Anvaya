@@ -15,7 +15,8 @@ import {
   ShieldCheck,
   HelpCircle,
   Activity,
-  Layers
+  Layers,
+  Compass
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -35,6 +36,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const { user, role } = useAuth();
 
   const mainNavItems = [
+    { id: 'landing', label: 'Portal Overview', icon: Compass },
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'copilot', label: 'AI Research Copilot', icon: Sparkles, badge: 'AI' },
     { id: 'repository', label: 'Research Repository', icon: BookOpen },
@@ -75,7 +77,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
         }`}
       >
         {/* Emblem & Brand Header */}
-        <div className="flex flex-col border-b border-slate-200 px-5 py-4 bg-slate-50/80">
+        <div
+          onClick={() => handleSelect('landing')}
+          className="flex flex-col border-b border-slate-200 px-5 py-4 bg-slate-50/80 cursor-pointer hover:bg-slate-100/80 transition-colors"
+          title="Return to Portal Overview"
+        >
           <div className="flex items-center space-x-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-white shadow-sm ring-1 ring-slate-950/10">
               <Layers className="h-5 w-5 text-amber-400" />

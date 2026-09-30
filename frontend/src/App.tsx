@@ -21,7 +21,7 @@ import { InnovationHubPage } from './pages/InnovationHubPage';
 import { AdminPage } from './pages/AdminPage';
 
 function AppContent() {
-  const [currentTab, setCurrentTab] = useState<string>('dashboard');
+  const [currentTab, setCurrentTab] = useState<string>('landing');
   const [navMeta, setNavMeta] = useState<any>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
