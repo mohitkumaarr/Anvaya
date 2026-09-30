@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------------------
+  # 1. PostgreSQL with pgvector extension
+  # ----------------------------------------------------
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: landgov_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-landgov}
+      POSTGRES_USER: ${POSTGRES_USER:-landgov}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-landgov_secure_password_2026}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-landgov} -d ${POSTGRES_DB:-landgov}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - landgov_network
+
+  # ----------------------------------------------------
+  # 2. FastAPI Backend Application Server
+  # ----------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: landgov_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-landgov}:${POSTGRES_PASSWORD:-landgov_secure_password_2026}@db:5432/${POSTGRES_DB:-landgov}
+      ENVIRONMENT: production
+      DEMO_MODE: "true"
+      SEED_ON_START: "true"
+      JWT_SECRET: ${JWT_SECRET:-national-land-governance-production-secret-key-2026-secure}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      WORKERS: 4
+      PORT: 8000
+    volumes:
+      - uploads_volume:/app/uploads
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    networks:
+      - landgov_network
+
+  # ----------------------------------------------------
+  # 3. React Frontend + Nginx Reverse Proxy
+  # ----------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: landgov_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+      - "3000:80"
+    networks:
+      - landgov_network
+
+volumes:
+  pgdata:
+    driver: local
+  uploads_volume:
+    driver: local
+
+networks:
+  landgov_network:
+    driver: bridge
