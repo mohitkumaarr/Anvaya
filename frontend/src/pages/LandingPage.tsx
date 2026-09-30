@@ -17,6 +17,7 @@ import {
   Scale
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { AnvayaLogo } from '../components/AnvayaLogo';
 
 interface LandingPageProps {
   onExplore: (tab?: string) => void;
@@ -30,19 +31,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onExplore }) => {
       {/* Institutional Top Header */}
       <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="h-9 w-9 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-              <Layers className="h-5 w-5" />
-            </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-bold text-base text-white tracking-tight">Anvaya</span>
-                <span className="rounded bg-amber-400/20 text-amber-300 px-1.5 py-0.5 text-[10px] font-semibold tracking-wider">
-                  NATIONAL PLATFORM MVP
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400">National Land Governance Research & Policy Platform</p>
-            </div>
+          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => onExplore('landing')}>
+            <AnvayaLogo size="md" showText={true} textColor="text-white" />
           </div>
 
           <div className="flex items-center space-x-3">
@@ -67,8 +57,21 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onExplore }) => {
       <section className="relative overflow-hidden pt-12 pb-20 border-b border-slate-800 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="flex justify-center mb-2">
+              <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 shadow-xl inline-flex items-center space-x-3">
+                <AnvayaLogo size="lg" />
+                <div className="text-left">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-lg font-black tracking-tight text-white uppercase">Anvaya</span>
+                    <span className="text-[10px] bg-amber-400/20 text-amber-300 font-bold px-1.5 py-0.5 rounded">NATIONAL DPI</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400">Interconnected Land Governance Nexus</p>
+                </div>
+              </div>
+            </div>
+
             <div className="inline-flex items-center space-x-2 rounded-full border border-slate-700 bg-slate-800/80 px-3 py-1 text-xs text-slate-300">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Digital Public Infrastructure Concept for India</span>
             </div>
 
@@ -200,11 +203,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onExplore }) => {
       {/* Institutional Footer */}
       <footer className="mt-auto border-t border-slate-800 bg-slate-950 py-8 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <p className="text-slate-400 font-semibold">Anvaya — National Land Governance Research & Policy Platform</p>
-            <p className="mt-1">
-              Demonstration environment. Synthetic and demonstration data clearly designated for research and policy prototyping.
-            </p>
+          <div className="flex items-center space-x-3">
+            <AnvayaLogo size="sm" showText={false} />
+            <div>
+              <p className="text-slate-300 font-semibold tracking-wide">Anvaya — National Land Governance Research & Policy Platform</p>
+              <p className="mt-1">
+                Demonstration environment. Synthetic and demonstration data clearly designated for research and policy prototyping.
+              </p>
+            </div>
           </div>
           <div className="flex items-center space-x-4">
             <button onClick={() => onExplore('dashboard')} className="hover:text-slate-300">Dashboard</button>

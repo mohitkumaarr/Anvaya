@@ -32,6 +32,7 @@ import {
   Legend
 } from 'recharts';
 import { api } from '../api';
+import { AnvayaLogo } from '../components/AnvayaLogo';
 
 interface DashboardPageProps {
   onNavigate: (tab: string, meta?: any) => void;
@@ -167,18 +168,23 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
     <div className="space-y-6 p-4 sm:p-6 max-w-7xl mx-auto">
       {/* Platform Title Banner */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-        <div>
-          <div className="flex items-center space-x-2">
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
-              National Land Governance Intelligence Hub
-            </h2>
-            <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">
-              Active Monitoring
-            </span>
+        <div className="flex items-center space-x-3.5">
+          <div className="hidden sm:flex p-1.5 rounded-xl bg-slate-900 shadow-sm shrink-0">
+            <AnvayaLogo size="sm" showText={false} />
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Real-time analytics synthesized from national research publications, statutory policies, and GIS indicators.
-          </p>
+          <div>
+            <div className="flex items-center space-x-2">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+                National Land Governance Intelligence Hub
+              </h2>
+              <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">
+                Active Monitoring
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              Real-time analytics synthesized from national research publications, statutory policies, and GIS indicators.
+            </p>
+          </div>
         </div>
 
         {/* Quick Launch Buttons */}

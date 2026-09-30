@@ -19,6 +19,7 @@ import {
   Compass
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { AnvayaLogo } from './AnvayaLogo';
 
 interface SidebarProps {
   currentTab: string;
@@ -79,25 +80,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Emblem & Brand Header */}
         <div
           onClick={() => handleSelect('landing')}
-          className="flex flex-col border-b border-slate-200 px-5 py-4 bg-slate-50/80 cursor-pointer hover:bg-slate-100/80 transition-colors"
+          className="flex flex-col border-b border-slate-200 px-4 py-3.5 bg-slate-50/80 cursor-pointer hover:bg-slate-100/80 transition-colors"
           title="Return to Portal Overview"
         >
-          <div className="flex items-center space-x-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-white shadow-sm ring-1 ring-slate-950/10">
-              <Layers className="h-5 w-5 text-amber-400" />
-            </div>
-            <div>
-              <div className="flex items-center space-x-1.5">
-                <span className="text-base font-bold tracking-tight text-slate-900">Anvaya</span>
-                <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-800">
-                  INDIA
-                </span>
-              </div>
-              <p className="text-[11px] leading-tight text-slate-500 font-medium">
-                Land Governance & Policy Platform
-              </p>
-            </div>
-          </div>
+          <AnvayaLogo size="md" showText={true} />
         </div>
 
         {/* Scrollable Navigation */}
